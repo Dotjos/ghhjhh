@@ -156,8 +156,7 @@ const pages = [
       Add-ons help enhance your gaming experience.
     </p>
     <div class="p-3  border w-full justify-between border-CoolGray rounded-lg flex mb-3 hover:bg-Magnolia hover:border-MarineBlue 2xl:p-6"">
-        <input type="checkbox" name="" id="addonCheckboxes" class="w-6" />
-
+        <input type="checkbox" name="" id="addonCheckboxesOne" class="w-10 h-10 mt-auto mb-auto checked:bg-MarineBlue" />
         <div class="ml-5 xl:text-xl ">
           <ul>
             <li class="font-bold">Online service</li>
@@ -171,7 +170,7 @@ const pages = [
   <div
     class="border p-3 border-CoolGray justify-between rounded-lg flex mb-3 hover:bg-Magnolia hover:border-MarineBlue 2xl:p-6"
   >
-    <input type="checkbox" name="" id="addonCheckboxes" class="w-6" />
+    <input type="checkbox" name="" id="addonCheckboxesTwo" class="w-10 h-10 mt-auto mb-auto" />
 
     <div class="ml-5  xl:text-xl ">
       <ul>
@@ -188,7 +187,7 @@ const pages = [
   <div
     class="border p-3 border-CoolGray justify-between rounded-lg flex mb-3 hover:bg-Magnolia hover:border-MarineBlue 2xl:p-6"
   >
-    <input type="checkbox" name="" id="addonCheckboxes" class="w-6" />
+    <input type="checkbox" name="" id="addonCheckboxesThree" class="w-10 h-10 mt-auto mb-auto" />
 
     <div class="ml-5 xl:text-xl">
       <ul>
