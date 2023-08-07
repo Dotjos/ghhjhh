@@ -255,7 +255,7 @@ const pages = [
   },
 ];
 
-let currentPage = 1;
+let currentPage = 0;
 numberOne.classList.add("bg-PastelBlue");
 contentChange.innerHTML = pages[currentPage].html;
 
