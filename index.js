@@ -51,6 +51,7 @@ const pages = [
        <h1 class="font-semibold errPhone text-StrawberryRed hidden">This field is required</h1>
       </div>
     <input
+     maxlength="11"
       type="text"
       placeholder="e.g. +1 234 567 890"
       name=""
@@ -437,7 +438,8 @@ function pageOnError() {
   const errMail = document.querySelector(".errMail");
   const errPhone = document.querySelector(".errPhone");
   let errInit = false;
-  if (!/^[A-Za-z]+$/.test(nameInput.value)) {
+
+  if (!/^[A-Za-z\s]+$/.test(nameInput.value)) {
     errName.classList.remove("hidden");
     errInit = true;
   } else {
