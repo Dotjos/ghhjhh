@@ -60,17 +60,21 @@ const pages = [
   </div>`,
   },
   {
-    html: `<h1 class="mt-7 text-3xl plans font-bold mb-4 xl:text-4xl 2xl:text-5xl">
+    html: `
+    <div class="flex mt-7 justify-between">
+    <h1 class=" text-3xl   plansl font-bold mb-4 xl:text-4xl 2xl:text-5xl">
     Select your plan
-    </h1>
+    </h1 >
+    <h1 class="text-2xl font-base emptyOne hidden text-StrawberryRed">Field is empty</h1>
+    </div>
     <p
     class="mb-5 font-normal text-lg text-CoolGray xl:pb-5 2xl:text-xl"
     >
     You have the option of monthly or yearly billing.
     </p>
-    <div class="2xl:flex 2xl:justify-between 2xl:h-2/4 2xl:mb-5">
+    <div class="xl:flex xl:justify-between xl:h-2/4 xl:mb-5">
     <div
-      class=" arcSel  border p-3 border-CoolGray rounded-lg flex mb-3  hover:border-MarineBlue 2xl:w-1/4 2xl:inline-block 2xl:p-6"
+      class=" arcSel xl:h-4/5  border p-3 border-CoolGray rounded-lg flex mb-3  hover:border-MarineBlue xl:w-1/4 xl:inline-block xl:p-6"
     >
       <img
         class="align-text-bottom"
@@ -78,7 +82,7 @@ const pages = [
         alt=""
       />
     
-      <div class="arcDiv pl-3 2xl:pl-0 2xl:pt-16  ">
+      <div class="arcDiv pl-3 xl:pl-0 xl:pt-16  ">
         <h1 class="font-medium text-lg">Arcade</h1>
         <h1 class=" text-CoolGray text-lg  arcPrice">
          $9/mo
@@ -88,14 +92,14 @@ const pages = [
     </div>
     
     <div
-      class=" advSel    border p-3 border-CoolGray rounded-lg flex mb-3  hover:border-MarineBlue 2xl:w-1/4 2xl:inline-block 2xl:p-6"
+      class=" advSel    border p-3 border-CoolGray rounded-lg flex mb-3  hover:border-MarineBlue xl:w-1/4 xl:inline-block xl:p-6"
     >
       <img
         class="align-text-bottom"
         src="./assets/images/icon-advanced.svg"
         alt=""
       />
-      <div class="advDiv  pl-3 2xl:pl-0 2xl:pt-16">
+      <div class="advDiv  pl-3 xl:pl-0 xl:pt-16">
         <h1 class="font-medium text-lg">Advanced</h1>
         <h1 class="text-CoolGray text-lg advPrice">
        $12/mo
@@ -105,14 +109,14 @@ const pages = [
     </div>
     
     <div
-      class=" proSel   border p-3 border-CoolGray rounded-lg flex mb-3  hover:border-MarineBlue 2xl:w-1/4 2xl:inline-block 2xl:p-6"
+      class=" proSel   border p-3 border-CoolGray rounded-lg flex mb-3  hover:border-MarineBlue xl:w-1/4 xl:inline-block xl:p-6"
     >
       <img
         class="align-text-bottom"
         src="./assets/images/icon-pro.svg"
         alt=""
       />
-      <div class="proDiv pl-3 2xl:pl-0 2xl:pt-16">
+      <div class="proDiv pl-3 xl:pl-0 xl:pt-16">
         <h1 class="font-medium text-lg">Pro</h1>
         <h1 class="text-CoolGray proPrice text-lg ">
           $15/mo
@@ -251,7 +255,7 @@ const pages = [
   },
 ];
 
-let currentPage = 0;
+let currentPage = 1;
 numberOne.classList.add("bg-PastelBlue");
 contentChange.innerHTML = pages[currentPage].html;
 
@@ -294,9 +298,7 @@ function next() {
     console.log(userData);
     updateNumberings();
   } else if (currentPage === 1) {
-    const plans = document.querySelector(".plans");
     currentPage++;
-    console.log(plans);
     contentChange.innerHTML = pages[currentPage].html;
   } else if (currentPage === 2) {
     currentPage++;
@@ -306,8 +308,6 @@ function next() {
     currentPage++;
     console.log(userData);
     contentChange.innerHTML = pages[currentPage].html;
-    const summaryUp = document.querySelector(".summaryUp");
-    const summaryDown = document.querySelector(".summaryDown");
   } else if (currentPage === 4) {
     contentChange.innerHTML = pages[currentPage].html;
   }
@@ -506,7 +506,7 @@ function pageTwoSel() {
     });
   });
 
-  const jujuju = (event) => {
+  const blueBg = (event) => {
     selDiv.forEach((div) => {
       div.classList.remove("bg-PastelBlue");
     });
@@ -515,7 +515,8 @@ function pageTwoSel() {
     // userData.plan = event.currentTarget;
   };
 
-  selDiv.forEach((div) => div.addEventListener("click", jujuju));
+  selDiv.forEach((div) => div.addEventListener("click", blueBg));
+  arcSel.classList.add("bg-PastelBlue");
 }
 
 function planDisplay() {
