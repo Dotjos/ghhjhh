@@ -140,7 +140,7 @@ const pages = [
           class="h-12 absolute w-12 opacity-0 z-10"
         />
         <span
-          class="slider absolute cursor-default border rounded-xl round top-0 h-2/4 bottom-0 left-0 right-0 bg-MarineBlue before:absolute before:h-4 before:w-4 before:left-2 before:bottom-1 before:bg-White before:rounded-full before:transition duration-300"
+          class="slider  absolute cursor-default border rounded-xl round top-0 h-2/4 bottom-0 left-0 right-0 bg-MarineBlue before:absolute before:h-4 before:w-4 before:left-2 before:bottom-1 before:bg-White before:rounded-full before:transition duration-300"
         ></span>
       </label>
       <h1>Yearly</h1>
@@ -295,7 +295,6 @@ function next() {
       currentPage++;
       contentChange.innerHTML = pages[currentPage].html;
     }
-    console.log(userData);
     updateNumberings();
   } else if (currentPage === 1) {
     currentPage++;
@@ -303,7 +302,6 @@ function next() {
   } else if (currentPage === 2) {
     currentPage++;
     contentChange.innerHTML = pages[currentPage].html;
-    console.log(userData);
   } else if (currentPage === 3) {
     currentPage++;
     console.log(userData);
@@ -312,7 +310,6 @@ function next() {
     contentChange.innerHTML = pages[currentPage].html;
   }
   pageStuffs();
-  console.log(currentPage);
 }
 
 function goBack() {
@@ -324,24 +321,22 @@ function goBack() {
   } else if (currentPage === 2) {
     currentPage--;
     contentChange.innerHTML = pages[currentPage].html;
-    pageStuffs();
+    userData.addOns.length = 0;
     updateNumberings();
   } else if (currentPage === 3) {
     userData.addOns.length = 0;
-    console.log(userData.addOns.length);
-    console.log("Wahahahahah");
     currentPage--;
     contentChange.innerHTML = pages[currentPage].html;
-    pageStuffs();
     updateNumberings();
   } else if (currentPage === 4) {
     currentPage--;
     contentChange.innerHTML = pages[currentPage].html;
-    pageStuffs();
     const footer = document.querySelector(".footer");
     footer.classList.remove("hidden");
     updateNumberings();
   }
+  console.log(userData.plan);
+  pageStuffs();
 }
 
 function reversal1() {
@@ -383,10 +378,9 @@ function pageStuffs() {
     nextButton.classList.remove("bg-PurplishBlue");
     pageTwoSel();
     updateNumberings();
-    // yearFunc();
+    updatoggle();
   }
   if (currentPage === 2) {
-    // yearFunc();
     backBtn.classList.remove("hidden");
     nextButton.textContent = "Next step";
     nextButton.classList.remove("bg-PurplishBlue");
@@ -400,7 +394,6 @@ function pageStuffs() {
     nextButton.textContent = "Confirm";
     nextButton.classList.add("bg-PurplishBlue");
     updateNumberings();
-    // yearFunc();
   }
   if (currentPage === 4) {
     const footer = document.querySelector(".footer");
@@ -414,10 +407,9 @@ pageStuffs();
 function checkBox() {
   const addonCheckboxes = document.querySelectorAll("#addonCheckboxes");
   addonCheckboxes.forEach((checkbox, index) => {
-    console.log(checkBox);
     checkbox.addEventListener("change", function () {
       if (this.checked) {
-        console.log(this); // 'this' refers to the checkbox element
+        // 'this' refers to the checkbox element
         userData.addOns.push(index);
       } else {
         const addonIndex = userData.addOns.indexOf(index);
@@ -427,7 +419,6 @@ function checkBox() {
       }
     });
   });
-  // addOnsDisplay();
 }
 
 function pageOnError() {
@@ -439,7 +430,7 @@ function pageOnError() {
   const errPhone = document.querySelector(".errPhone");
   let errInit = false;
 
-  if (!/^[A-Za-z\s]+$/.test(nameInput.value)) {
+  if (!/^[A-Za-z]+(\s[A-Za-z]+)*$/.test(nameInput.value)) {
     errName.classList.remove("hidden");
     errInit = true;
   } else {
@@ -470,29 +461,47 @@ function slidefunc() {
   const arcPrice = document.querySelector(".arcPrice");
   const advPrice = document.querySelector(".advPrice");
   const proPrice = document.querySelector(".proPrice");
-
   const slideHandle = document.querySelector(".slider");
-  let initial = false;
-  if (checkSlide.checked) {
-    initial = true;
+  slideHandle.classList.toggle("before:translate-x-5");
+  const toggled = slideHandle.classList.contains("before:translate-x-5");
+  if (toggled) {
     userClick[0] = true;
+    freeText.forEach((text) => {
+      text.classList.add("hidden");
+    });
   } else {
-    initial = false;
     userClick[0] = false;
-  }
-  if (initial) {
-    slideHandle.classList.add("before:translate-x-5");
-  } else {
-    slideHandle.classList.remove("before:translate-x-5");
-    arcPrice.textContent = "$9/mo";
-    advPrice.textContent = "$12/mo";
-    proPrice.textContent = "$15/mo";
-    freeText.forEach((div) => div.classList.add("hidden"));
+    arcPrice.textContent = "+$9/mo";
+    advPrice.textContent = "+$12/mo";
+    proPrice.textContent = "+$15/mo";
   }
   yearFunc();
-  console.log(userClick);
-  return initial;
+  return userClick[0];
 }
+
+// function pageTwoSel() {
+//   const arcSel = document.querySelector(".arcSel");
+//   const advSel = document.querySelector(".advSel");
+//   const proSel = document.querySelector(".proSel");
+//   const selDiv = [arcSel, advSel, proSel];
+
+//   selDiv.forEach((selector, index) => {
+//     selector.addEventListener("click", function () {
+//       userData.plan = index;
+//     });
+//   });
+
+//   const blueBg = (event) => {
+//     selDiv.forEach((div) => {
+//       div.classList.remove("bg-PastelBlue");
+//     });
+
+//     event.currentTarget.classList.add("bg-PastelBlue");
+//   };
+
+//   selDiv.forEach((div) => div.addEventListener("click", blueBg));
+//   arcSel.classList.add("bg-PastelBlue");
+// }
 
 function pageTwoSel() {
   const arcSel = document.querySelector(".arcSel");
@@ -500,24 +509,27 @@ function pageTwoSel() {
   const proSel = document.querySelector(".proSel");
   const selDiv = [arcSel, advSel, proSel];
 
+  // Load the previously selected plan from localStorage (if available)
+  const savedPlanIndex = localStorage.getItem("selectedPlan");
+  if (savedPlanIndex !== null) {
+    selDiv.forEach((div) => div.classList.remove("bg-PastelBlue"));
+    selDiv[savedPlanIndex].classList.add("bg-PastelBlue");
+  } else {
+    arcSel.classList.add("bg-PastelBlue"); // Default selection
+  }
+
   selDiv.forEach((selector, index) => {
     selector.addEventListener("click", function () {
       userData.plan = index;
-      console.log(index);
+
+      // Save the selected plan index to localStorage
+      localStorage.setItem("selectedPlan", index);
+
+      // Update the background colors
+      selDiv.forEach((div) => div.classList.remove("bg-PastelBlue"));
+      selector.classList.add("bg-PastelBlue");
     });
   });
-
-  const blueBg = (event) => {
-    selDiv.forEach((div) => {
-      div.classList.remove("bg-PastelBlue");
-    });
-
-    event.currentTarget.classList.add("bg-PastelBlue");
-    // userData.plan = event.currentTarget;
-  };
-
-  selDiv.forEach((div) => div.addEventListener("click", blueBg));
-  arcSel.classList.add("bg-PastelBlue");
 }
 
 function planDisplay() {
@@ -539,25 +551,24 @@ function planDisplay() {
   } else if (userData.plan === 1) {
     if (userClick[0]) {
       addOnPrice = 120;
-      planTitle.textContent = "Pro(yearly)";
+      planTitle.textContent = "Advance(yearly)";
       planPrice.textContent = "+$120/yr";
     } else {
       addOnPrice = 12;
-      planTitle.textContent = "Pro(monthly)";
+      planTitle.textContent = "Advance(monthly)";
       planPrice.textContent = "+$12/mo";
     }
   } else if (userData.plan === 2) {
     if (userClick[0]) {
       addOnPrice = 150;
-      planTitle.textContent = "Advance(yearly)";
+      planTitle.textContent = "Pro(yearly)";
       planPrice.textContent = "+$150/yr";
     } else {
       addOnPrice = 15;
-      planTitle.textContent = "Advance(monthly)";
-      planPrice.textContent = "+$12/mo";
+      planTitle.textContent = "Pro(monthly)";
+      planPrice.textContent = "+$15/mo";
     }
   }
-  console.log(addOnPrice);
   return addOnPrice;
 }
 
@@ -658,6 +669,15 @@ function yearFunc() {
       const total = document.querySelector(".total");
       total.textContent = "Total(per year)";
     }
+  }
+}
+
+function updatoggle() {
+  const slideHandle = document.querySelector(".slider");
+  if (!userClick[0]) {
+    slideHandle.classList.remove("before:translate-x-5");
+  } else {
+    slideHandle.classList.add("before:translate-x-5");
   }
 }
 
